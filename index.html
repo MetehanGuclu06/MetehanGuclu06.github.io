@@ -1,10 +1,278 @@
-<!DOCTYPE html>
-<html lang="tr">
+<!DOCTYPE html><html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <title>GitHub Pages Test</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SM Güçlü Plastik - Plastik Hammadde, Konsantre Boya ve Teknik Malzeme Tedarikçisi">
+  <title>SM Güçlü Plastik</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4;
+  color: #333;
+}
+
+header {
+  background: #004466;
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+section {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+  background: white;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+footer {
+  text-align: center;
+  background: #004466;
+  color: white;
+  padding: 1rem;
+}
+
+.social-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 1rem;
+}
+
+.social-links li a {
+  text-decoration: none;
+  color: #004466;
+}
+
+.map iframe {
+  width: 100%;
+  height: 300px;
+  border: none;
+  margin-top: 1rem;
+  border-radius: 8px;
+}
+/* Slider container */
+.slider-container {
+  position: relative;
+  max-width: 700px;
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #eee;
+}
+
+/* Hide all slides by default */
+.slides {
+  display: none;
+  width: 100%;
+  height: 400px;
+  text-align: center;
+  line-height: 400px; /* dikey ortalama */
+  position: relative;
+}
+
+/* Görseller tam otursun */
+.slides img {
+  vertical-align: middle;
+  max-width: 100%;
+  max-height: 100%;
+  cursor: pointer;
+  object-fit: contain;
+}
+
+/* Fade animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1s;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* Butonlar */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 12px;
+  margin-top: -22px;
+  color: #004466;
+  font-weight: bold;
+  font-size: 24px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  background-color: rgba(255,255,255,0.8);
+  border: 1px solid #004466;
+  transition: background-color 0.3s;
+}
+
+.prev:hover, .next:hover {
+  background-color: #004466;
+  color: white;
+}
+
+.prev {
+  left: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.next {
+  right: 0;
+  border-radius: 0 3px 3px 0;
+}
+
+/* Modal stil */
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 9999; 
+  padding-top: 60px; 
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 8px;
+  box-shadow: 0 0 15px #000;
+}
+
+.modal-close {
+  position: absolute;
+  top: 25px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+}
+  </style>
+<script>
+let slideIndex = 0;
+window.onload = function () {
+  showSlides();
+};
+
+function showSlides() {
+  let slides = document.getElementsByClassName("slides");
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  slides[slideIndex-1].style.display = "block";  
+  setTimeout(showSlides, 4000); // 4 saniyede değişiyor
+}
+
+function plusSlides(n) {
+  slideIndex += n - 1; // -1 dengeliyor çünkü showSlides ++ yapıyor
+  if (slideIndex < 0) slideIndex = 0;
+  showSlidesManual();
+}
+
+function showSlidesManual() {
+  let slides = document.getElementsByClassName("slides");
+  if (slideIndex >= slides.length) slideIndex = 0;
+  if (slideIndex < 0) slideIndex = slides.length - 1;
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slides[slideIndex].style.display = "block";  
+}
+
+// Modal açma
+function openModal(src) {
+  const modal = document.getElementById("modal");
+  const modalImg = document.getElementById("modal-img");
+  modal.style.display = "block";
+  modalImg.src = src;
+}
+
+// Modal kapatma (arka plan veya çarpıya tıklayınca)
+function closeModal(event) {
+  // Eğer event hedefi modal ya da kapatma işareti ise kapat
+  if(event.target.id === "modal" || event.target.classList.contains("modal-close")) {
+    document.getElementById("modal").style.display = "none";
+  }
+}
+</script>
+
 </head>
 <body>
-  <h1>GitHub Pages Başarıyla Çalışıyor!</h1>
+  <header>
+    <img src="logo.jpg" alt="SM Güçlü Plastik Logo" style="height:80px;">
+    <h1>SM Güçlü Plastik</h1>
+    <p>🔹 Her Molekülde Güç, Her Üründe Güven. 🔹</p>
+  </header>  <section id="about">
+    <h2>Hakkımızda</h2>
+    <p>SM Güçlü Plastik, 1999’dan bu yana plastik hammadde, konsantre boya ve teknik malzeme alanında kaliteli ve güvenilir çözümler sunmaktadır.</p>
+    <p>PP, ABS, PVC, PS, AYPE ve YYPE gibi birçok ürün grubunda; üreticilerin ihtiyacına uygun, güçlü ve sürdürülebilir hammaddeler tedarik ediyoruz.</p>
+    <p>Sanayinin temelini oluşturan her molekülde kaliteye, her üründe güvene inanıyoruz.</p>
+    <p>Üretiminize değer katmak için buradayız: dayanıklı yapılar, canlı renkler ve uzun ömürlü çözümler için bizi tercih eden yüzlerce markaya teşekkür ederiz.</p>
+    </section>  <section id="contact">
+    <h2>İletişim</h2>
+    <ul>
+      <li><strong>Adres:</strong> İVEDİKOSB MAH. 1539 CAD. NO:32 YENİMAHALLE / ANKARA</li>
+      <li><strong>Telefon:</strong> <a href="tel:+905359729543">0 535 972 95 43</a> </li>
+      <li><strong>Telefon:</strong> <a href="tel:+903123954278">0312 395 42 78</a></li>
+      <li><strong>E-posta:</strong> <a href="mailto:gucluplastik06@hotmail.com">gucluplastik06@hotmail.com</a></li>
+    </ul>
+    <div class="map">
+      <iframe src="https://maps.google.com/maps?q=İvedikosb%20Mah.%201539%20Cd.%20No:32%20Yenimahalle%20Ankara&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </section> <section id="gallery">
+  <h2>Ürün ve Çalışma Görselleri</h2>
+  <div class="slider-container">
+    <div class="slides fade">
+      <img src="foto1.jpg" alt="Ürün 1" onclick="openModal(this.src)">
+    </div>
+    <div class="slides fade">
+      <img src="foto2.jpg" alt="Ürün 2" onclick="openModal(this.src)">
+    </div>
+    <div class="slides fade">
+      <img src="foto3.jpg" alt="Ürün 3" onclick="openModal(this.src)">
+    </div>
+
+    <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+    <button class="next" onclick="plusSlides(1)">&#10095;</button>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal" onclick="closeModal(event)">
+    <span class="modal-close" onclick="closeModal(event)">&times;</span>
+    <img class="modal-content" id="modal-img" alt="Büyük Görsel">
+  </div>
+</section>  <section id="social">
+    <h2>Bizi Takip Edin</h2>
+    <ul class="social-links">
+      <li><a href="https://www.instagram.com/meteh4n.exe" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+      <li><a href="https://www.linkedin.com/in/metehan-güçlü-443a59352" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+      <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+      <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+    </ul>
+  </section>  <footer>
+    <p>&copy; 2025 SM Güçlü Plastik Makina Kauçuk İnş. San. Tic. Ltd. Şti. <br> <br> Tüm hakları saklıdır.</p>
+  </footer>
 </body>
 </html>
